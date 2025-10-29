@@ -3,7 +3,7 @@
 function getDbConnection() {
     $servername = "localhost";
     $username = "root";
-    $password = "12345678";
+    $password = "1234567";
     $dbname = "qldv";
     $port = 3306;
 
@@ -18,5 +18,6 @@ function getDbConnection() {
     mysqli_set_charset($conn, "utf8mb4");
     return $conn;
 }
+
 
 ?>

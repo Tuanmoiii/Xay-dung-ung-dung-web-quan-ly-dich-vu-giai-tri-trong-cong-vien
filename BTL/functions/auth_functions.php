@@ -114,4 +114,18 @@ function saveUserSession($user) {
     $_SESSION['role_name'] = $user['role_name'] ?? null;
 }
 
+
+// Hàm đăng ký tài khoản mới
+function registerUser($full_name, $password) {
+    global $conn;
+
+    // Lưu mật khẩu nguyên văn theo yêu cầu
+    // LƯU Ý: Việc lưu mật khẩu thô là không an toàn. Chỉ làm điều này khi chắc chắn.
+    $role_id = 4;
+
+    $stmt = $conn->prepare("INSERT INTO users (role_id, full_name, password_hash) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $role_id, $full_name, $password);
+
+    return $stmt->execute();
+}
 ?>

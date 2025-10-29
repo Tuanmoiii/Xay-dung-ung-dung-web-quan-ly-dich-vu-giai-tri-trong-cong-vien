@@ -11,6 +11,8 @@ session_start();
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- CSS riêng -->
     <link href="./css/login.css" rel="stylesheet">
@@ -67,7 +69,7 @@ session_start();
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <!-- Cột hình ảnh -->
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="./images/park.png" 
+                    <img src="./docs/logo/anh_dang_nhap.jpg" 
                          style="width: 100%; height: auto; border-radius: 15px;"
                          class="img-fluid" alt="Ảnh minh họa công viên">
                 </div>
@@ -107,9 +109,19 @@ session_start();
 
                         <!-- Nút đăng nhập -->
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" name="login" class="btn btn-primary btn-lg w-100">
+                            <button type="submit" name="login" class="btn btn-primary btn-lg w-100 mb-3">
                                 Đăng nhập
                             </button>
+                            
+                            <!-- Liên kết đăng ký -->
+                            <div class="text-center">
+                                <p class="mb-0">Chưa có tài khoản? 
+                                    <a href="./views/register.php" class="text-primary text-decoration-none fw-bold">
+                                        Đăng ký ngay
+                                        <i class="bi bi-arrow-right-circle ms-1"></i>
+                                    </a>
+                                </p>
+                            </div>
                         </div>
 
                     </form>
