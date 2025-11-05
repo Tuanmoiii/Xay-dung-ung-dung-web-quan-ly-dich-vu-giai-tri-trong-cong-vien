@@ -40,4 +40,21 @@ function deleteCustomer($id)
     mysqli_stmt_bind_param($stmt, "i", $id);
     return mysqli_stmt_execute($stmt);
 }
+
+function updateCustomer($id, $name, $email, $phone)
+{
+    $conn = getDbConnection();
+    $sql = "UPDATE customers SET full_name=?, email=?, phone=? WHERE customer_id=?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $phone, $id);
+    return mysqli_stmt_execute($stmt);
+}
+function getCustomerByUserId($user_id) {
+    $conn = getDbConnection();
+    $sql = "SELECT * FROM customers WHERE user_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+}
 ?>

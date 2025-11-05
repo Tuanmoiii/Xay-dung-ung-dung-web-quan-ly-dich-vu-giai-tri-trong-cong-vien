@@ -3,15 +3,12 @@
  * ===============================
  *  HỆ THỐNG QUẢN LÝ DỊCH VỤ GIẢI TRÍ CÔNG VIÊN
  *  Module: AUTHENTICATION FUNCTIONS
- *  Mô tả: Xử lý đăng nhập, đăng xuất, kiểm tra session
+ *  Mô tả: Xử lý đăng nhập, đăng xuất, kiểm tra session & phân quyền
  * ===============================
  */
 
 /**
  * Kiểm tra xem user đã đăng nhập chưa
- * Nếu chưa, chuyển hướng về trang login
- *
- * @param string $redirectPath Đường dẫn chuyển hướng (mặc định: '../index.php')
  */
 function checkLogin($redirectPath = '../index.php') {
     if (session_status() === PHP_SESSION_NONE) session_start();
@@ -24,8 +21,31 @@ function checkLogin($redirectPath = '../index.php') {
 }
 
 /**
+ * ✅ Kiểm tra quyền Admin
+ */
+function checkAdmin($redirectPath = '../index.php') {
+    checkLogin($redirectPath);
+    if ($_SESSION['role_id'] != 1) { // role_id = 1 là Admin
+        $_SESSION['error'] = 'Bạn không có quyền truy cập trang này!';
+        header('Location: ../views/customer/index.php');
+        exit();
+    }
+}
+
+/**
+ * ✅ Kiểm tra quyền Customer
+ */
+function checkCustomer($redirectPath = '../index.php') {
+    checkLogin($redirectPath);
+    if ($_SESSION['role_id'] != 4) { // role_id = 4 là Customer
+        $_SESSION['error'] = 'Trang này chỉ dành cho khách hàng!';
+        header('Location: ../views/dashboard/index.php');
+        exit();
+    }
+}
+
+/**
  * Hàm đăng xuất người dùng
- * Xóa toàn bộ session và chuyển hướng
  */
 function logout($redirectPath = '../index.php') {
     if (session_status() === PHP_SESSION_NONE) session_start();
@@ -39,9 +59,7 @@ function logout($redirectPath = '../index.php') {
 }
 
 /**
- * Lấy thông tin người dùng hiện tại (từ session)
- *
- * @return array|null
+ * Lấy thông tin người dùng hiện tại
  */
 function getCurrentUser() {
     if (session_status() === PHP_SESSION_NONE) session_start();
@@ -50,17 +68,15 @@ function getCurrentUser() {
         return [
             'id' => $_SESSION['user_id'],
             'full_name' => $_SESSION['full_name'],
-            'role_id' => $_SESSION['role_id'] ?? null,
-            'role_name' => $_SESSION['role_name'] ?? null
+            'role_id' => $_SESSION['role_id'],
+            'role_name' => ($_SESSION['role_id'] == 1) ? 'admin' : 'customer'
         ];
     }
     return null;
 }
 
 /**
- * Kiểm tra nhanh trạng thái đăng nhập (không redirect)
- *
- * @return bool
+ * Kiểm tra nhanh trạng thái đăng nhập
  */
 function isLoggedIn() {
     if (session_status() === PHP_SESSION_NONE) session_start();
@@ -68,19 +84,10 @@ function isLoggedIn() {
 }
 
 /**
- * Xác thực đăng nhập người dùng
- *
- * @param mysqli $conn Kết nối MySQL
- * @param string $full_name Họ tên (dùng làm định danh đăng nhập)
- * @param string $password Mật khẩu gõ vào
- * @return array|false Trả về mảng user nếu đúng, false nếu sai
+ * ✅ Xác thực người dùng
  */
 function authenticateUser($conn, $full_name, $password) {
-    $sql = "SELECT u.user_id, u.full_name, u.password_hash, u.role_id, r.role_name
-            FROM users u
-            LEFT JOIN roles r ON u.role_id = r.role_id
-            WHERE u.full_name = ? LIMIT 1";
-
+    $sql = "SELECT user_id, full_name, password_hash, role_id FROM users WHERE full_name = ? LIMIT 1";
     $stmt = mysqli_prepare($conn, $sql);
     if (!$stmt) return false;
 
@@ -89,7 +96,7 @@ function authenticateUser($conn, $full_name, $password) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($result && $user = mysqli_fetch_assoc($result)) {
-        // ✅ Kiểm tra mật khẩu (nếu chưa mã hóa thì dùng so sánh thường)
+        // Nếu mật khẩu chưa mã hoá thì so sánh trực tiếp
         if (password_verify($password, $user['password_hash']) || $password === $user['password_hash']) {
             mysqli_stmt_close($stmt);
             return $user;
@@ -101,9 +108,7 @@ function authenticateUser($conn, $full_name, $password) {
 }
 
 /**
- * Lưu thông tin user vào session sau khi đăng nhập thành công
- *
- * @param array $user Mảng thông tin người dùng
+ * ✅ Lưu thông tin user vào session
  */
 function saveUserSession($user) {
     if (session_status() === PHP_SESSION_NONE) session_start();
@@ -111,21 +116,33 @@ function saveUserSession($user) {
     $_SESSION['user_id']   = $user['user_id'];
     $_SESSION['full_name'] = $user['full_name'];
     $_SESSION['role_id']   = $user['role_id'];
-    $_SESSION['role_name'] = $user['role_name'] ?? null;
+
+    // Xác định role_name để tiện hiển thị
+    $_SESSION['role_name'] = ($user['role_id'] == 1) ? 'admin' : 'customer';
 }
 
-
-// Hàm đăng ký tài khoản mới
+/**
+ * ✅ Đăng ký tài khoản mới (role mặc định là Customer)
+ */
 function registerUser($full_name, $password) {
     global $conn;
+    $role_id = 4; // 4 = customer
 
-    // Lưu mật khẩu nguyên văn theo yêu cầu
-    // LƯU Ý: Việc lưu mật khẩu thô là không an toàn. Chỉ làm điều này khi chắc chắn.
-    $role_id = 4;
-
+    // 1️⃣ Tạo tài khoản người dùng
     $stmt = $conn->prepare("INSERT INTO users (role_id, full_name, password_hash) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $role_id, $full_name, $password);
+    if (!$stmt->execute()) return false;
 
-    return $stmt->execute();
+    // 2️⃣ Lấy user_id vừa tạo
+    $user_id = $conn->insert_id;
+
+    // 3️⃣ Tạo bản ghi trong bảng customers
+    $stmt2 = $conn->prepare("INSERT INTO customers (user_id, full_name, email, phone) VALUES (?, ?, '', '')");
+    $stmt2->bind_param("is", $user_id, $full_name);
+    $stmt2->execute();
+
+    return true;
 }
+
 ?>
+

@@ -1,29 +1,49 @@
 <?php
 session_start();
-require_once '../functions/db_connection.php';
-// Tạo kết nối DB và đặt vào biến toàn cục $conn vì auth_functions.php sử dụng global $conn
-$conn = getDbConnection();
-require_once '../functions/auth_functions.php';
+require_once '../functions/db_connection.php'; // ✅ đúng file chứa getDbConnection()
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $full_name = trim($_POST['full_name']);
-    $password = trim($_POST['password']);
-    $confirm_password = trim($_POST['confirm_password']);
+$conn = getDbConnection(); // ✅ gọi hàm để tạo kết nối
 
-    if ($password !== $confirm_password) {
-        $_SESSION['error'] = "Mật khẩu nhập lại không khớp!";
-        header("Location: ../views/register.php");
-        exit();
-    }
+// Nhận dữ liệu từ form
+$full_name = trim($_POST['full_name']);
+$email = trim($_POST['email']);
+$phone = trim($_POST['phone']);
+$password = trim($_POST['password']);
 
-    if (registerUser($full_name, $password)) {
-        $_SESSION['success'] = "Đăng ký thành công! Hãy đăng nhập.";
-        header("Location: ../index.php");
-        exit();
-    } else {
-        $_SESSION['error'] = "Đăng ký thất bại. Vui lòng thử lại.";
-        header("Location: ../views/register.php");
-        exit();
-    }
+// Kiểm tra dữ liệu đầu vào
+if ($full_name === '' || $password === '' || $email === '' || $phone === '') {
+    $_SESSION['error'] = 'Vui lòng nhập đầy đủ thông tin!';
+    header('Location: ../views/register.php');
+    exit();
 }
+
+// Mã hóa mật khẩu
+$password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+// Gán role_id = 4 (khách hàng)
+$role_id = 4;
+
+// 1️⃣ Thêm vào bảng users
+$stmt = $conn->prepare("INSERT INTO users (role_id, full_name, password_hash) VALUES (?, ?, ?)");
+$stmt->bind_param("iss", $role_id, $full_name, $password_hash);
+$stmt->execute();
+$user_id = $conn->insert_id;
+
+// 2️⃣ Thêm vào bảng customers
+$stmt2 = $conn->prepare("INSERT INTO customers (user_id, full_name, email, phone) VALUES (?, ?, ?, ?)");
+$stmt2->bind_param("isss", $user_id, $full_name, $email, $phone);
+$stmt2->execute();
+$customer_id = $conn->insert_id;
+
+// 3️⃣ Lưu session
+$customer_id = $conn->insert_id;
+$_SESSION['user_id'] = $user_id;
+$_SESSION['customer_id'] = $customer_id;
+$_SESSION['role_id'] = $role_id;
+$_SESSION['full_name'] = $full_name;
+
+// 4️⃣ Chuyển hướng sau đăng ký
+$_SESSION['success'] = 'Đăng ký thành công!';
+header("Location: ../views/customer/index.php");
+exit;
 ?>

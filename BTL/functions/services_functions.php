@@ -70,4 +70,15 @@ function deleteService($id)
     mysqli_stmt_bind_param($stmt, "i", $id);
     return mysqli_stmt_execute($stmt);
 }
+function getServicePriceById($service_id) {
+    $conn = getDbConnection();
+    $sql = "SELECT price FROM services WHERE service_id = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $service_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+    return $row ? floatval($row['price']) : 0;
+}
+
 ?>

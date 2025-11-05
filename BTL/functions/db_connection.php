@@ -3,7 +3,7 @@
 function getDbConnection() {
     $servername = "localhost";
     $username = "root";
-    $password = "1234567";
+    $password = "12345678";
     $dbname = "qldv";
     $port = 3306;
 
