@@ -24,43 +24,77 @@ session_start();
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
-
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('./images/bg-park.jpg') center/cover no-repeat;
+            opacity: 0.18;
+            z-index: 0;
+        }
         .login-container {
             flex: 1;
+            z-index: 1;
         }
-
         .brand-title {
             font-weight: bold;
             color: #0066cc;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.18);
+            font-size: 2.1rem;
+            letter-spacing: 1px;
         }
-
         .form-control {
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
         }
-
         .btn-primary {
-            background-color: #0066cc;
+            background: linear-gradient(90deg, #0066cc 60%, #66a6ff 100%);
             border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-
         .btn-primary:hover {
-            background-color: #004999;
+            background: linear-gradient(90deg, #004999 60%, #66a6ff 100%);
         }
-
+        .img-fluid {
+            box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+            border: 3px solid #fff;
+            transition: transform 0.2s;
+        }
+        .img-fluid:hover {
+            transform: scale(1.04);
+        }
         .footer {
-            background: #003366;
+            background: linear-gradient(90deg, #003366 60%, #0066cc 100%);
             color: #fff;
             text-align: center;
-            padding: 15px;
+            padding: 18px 0 10px 0;
+            font-size: 15px;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .footer .footer-icons {
+            margin-bottom: 8px;
+        }
+        .footer .footer-icons a {
+            color: #fff;
+            margin: 0 8px;
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+        .footer .footer-icons a:hover {
+            color: #89f7fe;
+        }
+        .footer .footer-desc {
             font-size: 14px;
+            opacity: 0.85;
         }
     </style>
 </head>
 
 <body>
-    <section class="vh-100 d-flex justify-content-center align-items-center login-container">
+    <div class="bg-overlay"></div>
+    <section class="vh-100 d-flex justify-content-center align-items-center login-container position-relative">
         <div class="container-fluid h-custom">
             <div class="d-flex flex-row align-items-center justify-content-center mb-4">
                 <h2 class="brand-title">HỆ THỐNG QUẢN LÝ DỊCH VỤ CÔNG VIÊN (QLDV)</h2>
@@ -132,7 +166,15 @@ session_start();
 
     <!-- Footer -->
     <footer class="footer">
-        Hệ thống QLDV | FITDNU - Open Source
+        <div class="footer-icons mb-2">
+            <a href="#" title="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" title="Email"><i class="bi bi-envelope-fill"></i></a>
+            <a href="#" title="Github"><i class="bi bi-github"></i></a>
+        </div>
+        <div class="footer-desc">
+            <span><i class="bi bi-tree-fill"></i> Hệ thống QLDV | FITDNU - Open Source</span><br>
+            <span>Liên hệ: <a href="mailto:support@fitdnu.edu.vn" class="text-info text-decoration-none">support@fitdnu.edu.vn</a></span>
+        </div>
     </footer>
 
     <!-- Bootstrap JS -->

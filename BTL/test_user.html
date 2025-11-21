@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FunPark</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-white font-sans">
+
+  <!-- HEADER -->
+  <header class="bg-[#0f0f0f] px-8 py-3 flex items-center justify-between shadow-md">
+    <div class="flex items-center space-x-4">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Circle-icons-rollercoaster.svg/1024px-Circle-icons-rollercoaster.svg.png" class="w-8 h-8" alt="Logo">
+      <span class="text-[#00b3ff] text-lg font-bold tracking-wide">FunPark</span>
+
+      <nav class="ml-6 flex items-center space-x-6 text-sm">
+        <a href="#" class="flex items-center space-x-1 text-[#00b3ff] font-semibold hover:text-cyan-400 transition">
+          <i class="ri-home-4-line"></i>
+          <span>Trang chủ</span>
+        </a>
+        <a href="#" class="flex items-center space-x-1 hover:text-cyan-400 transition">
+          <i class="ri-ticket-2-line"></i>
+          <span>Dịch vụ</span>
+        </a>
+        <a href="#" class="flex items-center space-x-1 hover:text-cyan-400 transition">
+          <i class="ri-calendar-line"></i>
+          <span>Lịch chiếu</span>
+        </a>
+        <a href="#" class="flex items-center space-x-1 hover:text-cyan-400 transition">
+          <i class="ri-mail-line"></i>
+          <span>Liên hệ</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="flex items-center space-x-5">
+      <!-- Search box -->
+      <div class="relative">
+        <input type="text" placeholder="Tìm kiếm dịch vụ..." class="bg-[#1c1c1c] rounded-full px-4 py-2 pl-9 text-sm text-gray-200 placeholder-gray-400 focus:outline-none w-56">
+        <i class="ri-search-line absolute left-3 top-2.5 text-gray-400"></i>
+      </div>
+
+      <!-- User info -->
+      <div class="flex items-center space-x-2">
+        <div class="text-right leading-tight">
+          <p class="text-sm font-semibold">Trần Thị Hường</p>
+          <p class="text-xs text-gray-400">Khách hàng VIP</p>
+        </div>
+        <div class="relative">
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" class="w-8 h-8 rounded-full bg-[#1c1c1c] p-1">
+          <i class="ri-arrow-down-s-line absolute -right-2 top-3 w-3 h-3 text-gray-400"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNER -->
+  <section class="relative h-[360px] flex items-center px-16 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-400 opacity-95"></div>
+    <img src="docs/logo/anh_dang_nhap.jpg"
+         alt="FunPark Banner"
+         class="absolute inset-0 w-full h-full object-cover opacity-40">
+
+    <div class="relative z-10 max-w-xl">
+      <h1 class="text-4xl font-extrabold mb-3">Chào mừng đến với FunPark</h1>
+      <p class="text-gray-100 text-sm mb-6 leading-relaxed">
+        Khám phá thế giới giải trí đầy màu sắc với hàng trăm trò chơi hấp dẫn và dịch vụ cao cấp
+      </p>
+      <div class="flex space-x-4">
+        <button class="bg-[#111] px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#222]">Khám phá ngay</button>
+        <button class="border border-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-white hover:text-black transition">Xem lịch chiếu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DỊCH VỤ NỔI BẬT -->
+  <section class="py-16 text-center bg-[#0a0a0a]">
+    <h2 class="text-2xl font-bold mb-2">Dịch vụ nổi bật</h2>
+    <p class="text-gray-400 text-sm mb-10">Trải nghiệm những dịch vụ giải trí đỉnh cao tại FunPark</p>
+
+    <div class="flex justify-center gap-10 flex-wrap">
+      <!-- CARD 1 -->
+      <div class="bg-[#1a1a1a] w-72 rounded-2xl overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1518398046576-939f91a1f8e1?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover" alt="">
+        <div class="p-5 text-left">
+          <h3 class="font-semibold mb-1 text-sm">Tàu lượn siêu tốc</h3>
+          <p class="text-xs text-gray-400 mb-4">Trải nghiệm cảm giác mạnh với tàu lượn hiện đại nhất</p>
+          <div class="flex items-center justify-between">
+            <span class="text-[#00b3ff] font-semibold text-sm">₫150,000</span>
+            <button class="bg-[#005b9f] text-white text-xs px-4 py-1.5 rounded-md">Đặt ngay</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="bg-[#1a1a1a] w-72 rounded-2xl overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover" alt="">
+        <div class="p-5 text-left">
+          <h3 class="font-semibold mb-1 text-sm">Vòng quay khổng lồ</h3>
+          <p class="text-xs text-gray-400 mb-4">Ngắm nhìn toàn cảnh từ độ cao 60m</p>
+          <div class="flex items-center justify-between">
+            <span class="text-[#00b3ff] font-semibold text-sm">₫100,000</span>
+            <button class="bg-[#005b9f] text-white text-xs px-4 py-1.5 rounded-md">Đặt ngay</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="bg-[#1a1a1a] w-72 rounded-2xl overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=800&q=80" class="w-full h-48 object-cover" alt="">
+        <div class="p-5 text-left">
+          <h3 class="font-semibold mb-1 text-sm">Nhà ma ám</h3>
+          <p class="text-xs text-gray-400 mb-4">Thử thách lòng can đảm trong bóng tối</p>
+          <div class="flex items-center justify-between">
+            <span class="text-[#00b3ff] font-semibold text-sm">₫80,000</span>
+            <button class="bg-[#333333] text-gray-400 text-xs px-4 py-1.5 rounded-md">Bảo trì</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#111111] text-gray-300 px-8 py-12 mt-16">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- FunPark Info -->
+      <div>
+        <h3 class="text-xl font-bold text-[#00b3ff] mb-3">FunPark</h3>
+        <p class="text-sm leading-relaxed">
+          Công viên giải trí hàng đầu với hàng trăm trò chơi hấp dẫn và dịch vụ cao cấp, mang đến những trải nghiệm khó quên cho bạn và gia đình.
+        </p>
+      </div>
+
+      <!-- Liên hệ -->
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Liên hệ</h3>
+        <p class="text-sm">123 Đường Nguyễn Văn Cừ, Quận 5, TP.HCM</p>
+        <p class="text-sm">1900 1234</p>
+        <p class="text-sm">info@funpark.vn</p>
+      </div>
+
+      <!-- Giờ hoạt động -->
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Giờ hoạt động</h3>
+        <p class="text-sm">Thứ 2 - Thứ 6: 8:00 - 22:00</p>
+        <p class="text-sm">Thứ 7 - Chủ nhật: 7:00 - 23:00</p>
+        <p class="text-sm">Ngày lễ: 7:00 - 24:00</p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-gray-500 text-sm">
+      © 2025 FunPark. Tất cả quyền được bảo lưu.
+    </div>
+  </footer>
+
+</body>
+</html>

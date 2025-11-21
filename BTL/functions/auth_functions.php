@@ -137,8 +137,9 @@ function registerUser($full_name, $password) {
     $user_id = $conn->insert_id;
 
     // 3️⃣ Tạo bản ghi trong bảng customers
-    $stmt2 = $conn->prepare("INSERT INTO customers (user_id, full_name, email, phone) VALUES (?, ?, '', '')");
-    $stmt2->bind_param("is", $user_id, $full_name);
+    // NOTE: một số schema không có cột user_id trong customers, dùng INSERT tương thích
+    $stmt2 = $conn->prepare("INSERT INTO customers (full_name, email, phone) VALUES (?, '', '')");
+    $stmt2->bind_param("s", $full_name);
     $stmt2->execute();
 
     return true;

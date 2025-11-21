@@ -12,7 +12,8 @@ checkLogin();
 // ✅ Lấy thông tin người dùng hiện tại
 $user_id      = $_SESSION['user_id'] ?? null;
 $role_id      = $_SESSION['role_id'] ?? null;
-$customer_id  = $_SESSION['customer_id'] ?? null; // ✅ thêm dòng này
+// Một vài nơi lưu customer id khác nhau trong session - fallback về user_id nếu không có
+$customer_id  = $_SESSION['customer_id'] ?? $_SESSION['user_id'] ?? null; // ✅ đảm bảo luôn có id khách
 
 // ✅ Chỉ cho phép khách hàng (role_id = 4)
 if ($role_id != 4) {

@@ -49,12 +49,9 @@ function updateCustomer($id, $name, $email, $phone)
     mysqli_stmt_bind_param($stmt, "sssi", $name, $email, $phone, $id);
     return mysqli_stmt_execute($stmt);
 }
-function getCustomerByUserId($user_id) {
-    $conn = getDbConnection();
-    $sql = "SELECT * FROM customers WHERE user_id = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $user_id);
-    mysqli_stmt_execute($stmt);
-    return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+// Backwards-compatible helper: in this project we identify customers by `customer_id`.
+// Keep the function name for compatibility but delegate to getCustomerById.
+function getCustomerByUserId($customer_id) {
+    return getCustomerById($customer_id);
 }
 ?>

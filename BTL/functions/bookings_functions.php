@@ -4,8 +4,8 @@
 // Quản lý đặt vé
 // ===========================================
 require_once __DIR__ . '/db_connection.php';
-require_once __DIR__ . '/../functions/services_functions.php';
-require_once __DIR__ . '/../functions/customers_functions.php';
+require_once __DIR__ . '/services_functions.php';
+require_once __DIR__ . '/customers_functions.php';
 
 
 
@@ -13,12 +13,14 @@ function createBooking($customer_id, $schedule_id, $num_people, $total_amount)
 {
     $conn = getDbConnection();
     $ref = 'BK' . strtoupper(uniqid());
-    $sql = "INSERT INTO bookings (booking_ref, customer_id, schedule_id, num_people, total_amount)
-            VALUES (?, ?, ?, ?, ?)";
+    // Set initial status to 'pending' so new bookings are tracked consistently
+    $sql = "INSERT INTO bookings (booking_ref, customer_id, schedule_id, num_people, total_amount, status)
+            VALUES (?, ?, ?, ?, ?, 'pending')";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "siiid", $ref, $customer_id, $schedule_id, $num_people, $total_amount);
-    mysqli_stmt_execute($stmt);
-    return $ref;
+    $ok = mysqli_stmt_execute($stmt);
+    if ($ok) return $ref;
+    return false;
 }
 
 function getBookingByRef($ref)
@@ -83,7 +85,8 @@ function deleteBooking($ref)
 function getBookingCountForSchedule($schedule_id)
 {
     $conn = getDbConnection();
-    $sql = "SELECT COALESCE(SUM(num_people), 0) as total FROM bookings WHERE schedule_id = ?";
+    // Exclude cancelled bookings when counting capacity usage
+    $sql = "SELECT COALESCE(SUM(num_people), 0) as total FROM bookings WHERE schedule_id = ? AND (status IS NULL OR status <> 'cancelled')";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "i", $schedule_id);
     mysqli_stmt_execute($stmt);
@@ -93,20 +96,16 @@ function getBookingCountForSchedule($schedule_id)
 // Lấy danh sách các đặt vé của 1 khách hàng
 function getBookingsByCustomer($customer_id) {
     $conn = getDbConnection();
-    $stmt = $conn->prepare("
-        SELECT 
-            booking_id,
-            booking_ref,
-            customer_id,
-            schedule_id,
-            num_people,
-            total_amount AS total,
-            status,
-            created_at
-        FROM bookings
-        WHERE customer_id = ?
-        ORDER BY created_at DESC
-    ");
+    // Join schedules and services so the view has service name, schedule date/time and price
+    $sql = "SELECT b.booking_id, b.booking_ref, b.customer_id, b.schedule_id, b.num_people,
+                   COALESCE(b.total_amount, 0) AS total, COALESCE(b.status, 'pending') AS status,
+                   b.created_at, s.date, s.start_time, s.end_time, sv.service_id, sv.service_name, sv.price
+            FROM bookings b
+            LEFT JOIN schedules s ON b.schedule_id = s.schedule_id
+            LEFT JOIN services sv ON s.service_id = sv.service_id
+            WHERE b.customer_id = ?
+            ORDER BY b.created_at DESC";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $customer_id);
     $stmt->execute();
     $result = $stmt->get_result();
