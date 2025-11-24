@@ -145,16 +145,22 @@ Truy cập hệ thống:
 👉 http://localhost/index.php
 
 ### 4.6. Đăng nhập lần đầu
-Hệ thống có thể cấp tài khoản admin 
+Hệ thống có thể cấp tài khoản admin.
 
 Sau khi đăng nhập Admin có thể:
-- Quản lý dịch vụ
-- Quản lý lịch chiếu 
-- Quản lý khách hàng 
-- Quản lý đặt vé
-- Quản lý thanh toán 
-Sau khi đăng nhập Admin có thể:
-- Xem thông tin cá nhân
-- Tìm kiếm dịch vụ mình cần
-- Lịch sử đặt vé 
+
+- Quản lý dịch vụ  
+- Quản lý lịch chiếu  
+- Quản lý khách hàng  
+- Quản lý đặt vé  
+- Quản lý thanh toán  
+
+---
+
+Sau khi đăng nhập Khách hàng có thể:
+
+- Xem thông tin cá nhân  
+- Tìm kiếm dịch vụ mình cần  
+- Xem lịch sử đặt vé  
+
 
