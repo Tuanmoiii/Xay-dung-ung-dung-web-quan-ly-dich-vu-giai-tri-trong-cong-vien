@@ -52,28 +52,40 @@ Với giao diện trực quan, logic nghiệp vụ rõ ràng và hệ thống ph
 </div>
 
 ## 🚀 3. Hình ảnh các chức năng
+
 ### Trang đăng ký
-<img width="1902" height="931" alt="image" src="docs\logo\Dang_ky.png" />
+<img width="1902" height="931" src="docs/logo/Dang_ky.png" />
+
 ### Trang đăng nhập
-<img width="1902" height="931" alt="image" src="docs\logo\Dang_nhap.png" />
+<img width="1902" height="931" src="docs/logo/Dang_nhap.png" />
+
 ### Trang dashboard admin
-<img width="1885" height="935" alt="image" src="docs\logo\dashbroad_admin.png" />
+<img width="1885" height="935" src="docs/logo/dashbroad_admin.png" />
+
 ### Trang quản lý dịch vụ
-<img width="1886" height="940" alt="image" src="docs\logo\Quan_ly_dich_vu.png" />
-### Trang quản lý lịch chiếu    
-<img width="1888" height="949" alt="image" src="docs\logo\Quan_ly_lich_chieu.png" />
+<img width="1886" height="940" src="docs/logo/Quan_ly_dich_vu.png" />
+
+### Trang quản lý lịch chiếu
+<img width="1888" height="949" src="docs/logo/Quan_ly_lich_chieu.png" />
+
 ### Trang quản lý khách hàng
-<img width="1901" height="939" alt="image" src="docs\logo\Quan_ly_khach_hang.png" />
+<img width="1901" height="939" src="docs/logo/Quan_ly_khach_hang.png" />
+
 ### Trang quản lý đặt vé
-<img width="1892" height="938" alt="image" src="docs\logo\Quan_ly_dat_ve.png" />
-### Trang quản thanh toán
-<img width="1882" height="937" alt="image" src="docs\logo\Quan_ly_thanh_toan.png" />
-### Trang dashboard Khách hàng
-<img width="1882" height="937" alt="image" src="docs\logo\dasbroad_khach_hang.png" />
+<img width="1892" height="938" src="docs/logo/Quan_ly_dat_ve.png" />
+
+### Trang quản lý thanh toán
+<img width="1882" height="937" src="docs/logo/Quan_ly_thanh_toan.png" />
+
+### Trang dashboard khách hàng
+<img width="1882" height="937" src="docs/logo/dasbroad_khach_hang.png" />
+
 ### Trang thông tin cá nhân của khách hàng
-<img width="1887" height="934" alt="image" src="docs\logo\Thong_tin_ca_nhan.png" />
+<img width="1887" height="934" src="docs/logo/Thong_tin_ca_nhan.png" />
+
 ### Trang lịch sử đặt vé của khách hàng
-<img width="1888" height="944" alt="image" src="docs\logo\Lich_su_dat_ve_khach_hang.png" />
+<img width="1888" height="944" src="docs/logo/Lich_su_dat_ve_khach_hang.png" />
+
 ## ⚙️ 4. Cài đặt
 
 ### 4.1. Cài đặt công cụ, môi trường và các thư viện cần thiết
