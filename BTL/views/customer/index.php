@@ -82,7 +82,7 @@ $filtered_services = array_filter($services, function($s) use ($q, $price_min, $
                 <nav class="flex flex-col gap-2">
                     <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/30" href="#">
                         <span class="material-symbols-outlined text-white text-xl">dashboard</span>
-                        <p class="text-white text-sm font-medium leading-normal">Tổng quan</p>
+                        <p class="text-white text-sm font-medium leading-normal">Dịch vụ của tôi</p>
                     </a>
                     <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors" href="../customer/profile.php">
                         <span class="material-symbols-outlined text-white text-xl">person</span>
@@ -92,18 +92,12 @@ $filtered_services = array_filter($services, function($s) use ($q, $price_min, $
                         <span class="material-symbols-outlined text-white text-xl">history</span>
                         <p class="text-white text-sm font-medium leading-normal">Lịch sử đặt vé</p>
                     </a>
-                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors" href="../customer/services.php">
-                        <span class="material-symbols-outlined text-white text-xl">confirmation_number</span>
-                        <p class="text-white text-sm font-medium leading-normal">Dịch vụ của tôi</p>
-                    </a>
+                   
                 </nav>
             </div>
         </div>
         <div class="flex flex-col gap-1">
-            <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors" href="#">
-                <span class="material-symbols-outlined text-white text-xl">settings</span>
-                <p class="text-white text-sm font-medium leading-normal">Cài đặt</p>
-            </a>
+            
             <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/10 transition-colors" href="../../handle/logout_process.php">
                 <span class="material-symbols-outlined text-white text-xl">logout</span>
                 <p class="text-white text-sm font-medium leading-normal">Đăng xuất</p>
