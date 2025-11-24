@@ -103,16 +103,14 @@ Clone project về thư mục `htdocs` của XAMPP (ví dụ ổ C):
 ```bash
 cd C:\xampp\htdocs
 https://github.com/Tuanmoiii/Xay-dung-ung-dung-web-quan-ly-dich-vu-giai-tri-trong-cong-vien
-Truy cập project qua đường dẫn:
-👉 http://localhost/authentication_login.
-```
+
 ### 4.3. Setup database
 Mở XAMPP Control Panel, Start Apache và MySQL
 
 Truy cập MySQL WorkBench
 Tạo database:
 ```bash
-CREATE DATABASE IF NOT EXISTS quan_ly_doan_vien
+CREATE DATABASE IF NOT EXISTS quan_ly_dich_vuvu
    CHARACTER SET utf8mb4
    COLLATE utf8mb4_unicode_ci;
 ```
@@ -122,19 +120,27 @@ Mở file config.php (hoặc .env) trong project, chỉnh thông tin DB:
 ```bash
 
 <?php
-    function getDbConnection() {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "quan_ly_doan_vien";
-        $port = 3306;
-        $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
-        if (!$conn) {
-            die("Kết nối database thất bại: " . mysqli_connect_error());
-        }
-        mysqli_set_charset($conn, "utf8");
-        return $conn;
+
+function getDbConnection() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qldv";
+    $port = 3306;
+
+    // Tạo kết nối
+    $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+    // Kiểm tra kết nối
+    if (!$conn) {
+        die("Kết nối database thất bại: " . mysqli_connect_error());
     }
+    // Thiết lập charset cho kết nối (quan trọng để hiển thị tiếng Việt đúng)
+    mysqli_set_charset($conn, "utf8mb4");
+    return $conn;
+}
+
+
 ?>
 ```
 ### 4.5. Chạy hệ thống
