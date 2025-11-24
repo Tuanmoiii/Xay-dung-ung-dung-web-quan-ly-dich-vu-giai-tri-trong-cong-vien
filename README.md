@@ -21,8 +21,11 @@
 </div>
 
 ## 📖 1. Giới thiệu
-Hệ thống Quản lý Đoàn viên trong trường Đại học được xây dựng nhằm hỗ trợ công tác quản lý, theo dõi và đánh giá hoạt động của Đoàn Thanh niên trong môi trường giáo dục đại học. Thay vì quản lý thủ công bằng giấy tờ hay các tệp Excel rời rạc, hệ thống mang đến một giải pháp tập trung, hiện đại và dễ sử dụng.
+Ứng dụng Web Quản lý Dịch vụ Giải trí Công viên được xây dựng nhằm hỗ trợ các khu vui chơi, công viên giải trí quản lý toàn bộ hoạt động vận hành một cách hiệu quả và hiện đại. Hệ thống tập trung vào việc số hóa quy trình quản lý dịch vụ, lịch hoạt động, đặt vé, người dùng và các nghiệp vụ liên quan, giúp giảm thiểu sai sót thủ công và nâng cao trải nghiệm của khách hàng.
 
+Ứng dụng cho phép Ban quản lý công viên dễ dàng theo dõi danh mục dịch vụ vui chơi, quản lý lịch mở cửa – bảo trì, kiểm soát dữ liệu đặt vé, phân quyền người dùng và thống kê hoạt động theo thời gian thực. Đồng thời, khách hàng có thể truy cập hệ thống để xem thông tin dịch vụ, đặt vé trực tuyến và theo dõi trạng thái giao dịch nhanh chóng.
+
+Với giao diện trực quan, logic nghiệp vụ rõ ràng và hệ thống phân quyền chặt chẽ, ứng dụng mang đến giải pháp tối ưu cho việc vận hành công viên hiện đại, góp phần nâng cao hiệu suất quản lý, tinh giản quy trình làm việc và tăng mức độ hài lòng của khách tham quan.
 ## 🔧 2. Các công nghệ được sử dụng
 <div align="center">
 
@@ -88,7 +91,7 @@ Clone project về thư mục `htdocs` của XAMPP (ví dụ ổ C):
 
 ```bash
 cd C:\xampp\htdocs
-https://github.com/tyanzuq2811/BTL_Quan_ly_doan_vien.git
+https://github.com/Tuanmoiii/Xay-dung-ung-dung-web-quan-ly-dich-vu-giai-tri-trong-cong-vien
 Truy cập project qua đường dẫn:
 👉 http://localhost/authentication_login.
 ```
@@ -133,7 +136,13 @@ Truy cập hệ thống:
 Hệ thống có thể cấp tài khoản admin 
 
 Sau khi đăng nhập Admin có thể:
+- Quản lý dịch vụ
+- Quản lý lịch chiếu 
+- Quản lý khách hàng 
+- Quản lý đặt vé
+- Quản lý thanh toán 
+Sau khi đăng nhập Admin có thể:
+- Xem thông tin cá nhân
+- Tìm kiếm dịch vụ mình cần
+- Lịch sử đặt vé 
 
-Tạo thông tin tổ chức đoàn (Đoàn trường, Liên chi, Chi đoàn)
-
-Thêm đoàn viên và cấp tài khoản
